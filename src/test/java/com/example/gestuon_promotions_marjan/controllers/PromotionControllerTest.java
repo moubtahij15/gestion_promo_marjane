@@ -54,4 +54,16 @@ class PromotionControllerTest {
     void acceptPromotion() {
         assertTrue(promotionController.acceptPromotion(9, new Commentaires("Bien validé", 9)));
     }
+
+    @Test
+    void refusPromotion() {
+        assertTrue(promotionController.refusPromotion(8 ));
+
+    }
+
+    @Test
+    void acceptedPromotionByResponsable() {
+        assertNotNull(promotionController.acceptedPromotionByResponsable(36));
+
+    }
 }

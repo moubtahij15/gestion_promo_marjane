@@ -6,6 +6,7 @@ import com.example.gestuon_promotions_marjan.DAO.PromotionDAO;
 import com.example.gestuon_promotions_marjan.Entity.Categorie;
 import com.example.gestuon_promotions_marjan.Entity.Commentaires;
 import com.example.gestuon_promotions_marjan.Entity.Promotion;
+import com.example.gestuon_promotions_marjan.helpers.Enum;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -42,11 +43,11 @@ public class PromotionController {
     List<Promotion> pendingPromotionByResponsable(int id) {
         LocalTime now = LocalTime.now();
         LocalTime startTime = LocalTime.parse("00:00");
-        LocalTime endTime = LocalTime.parse("01:00");
+        LocalTime endTime = LocalTime.parse("02:00");
         if ((now.isAfter(startTime) && now.isBefore(endTime))) {
             System.out.println("eee");
             List<Promotion> promotionList = promotionDAO.findAll();
-            promotionList = promotionList.stream().filter(promotion -> promotion.getCategorieByIdCategorie().getIdRespo() == id).collect(Collectors.toList());
+            promotionList = promotionList.stream().filter(promotion -> promotion.getCategorieByIdCategorie().getIdRespo() == id).filter(promotion -> promotion.getStatut().equals(Enum.Statut.PENDING.toString())).collect(Collectors.toList());
             if (promotionList.size() != 0) {
                 promotionList.forEach(promotion -> System.out.println(promotion.getStatut()));
 
@@ -58,10 +59,30 @@ public class PromotionController {
         return null;
     }
 
+    List<Promotion> acceptedPromotionByResponsable(int id) {
+
+            List<Promotion> promotionList = promotionDAO.findAll();
+            promotionList = promotionList.stream().filter(promotion -> promotion.getCategorieByIdCategorie().getIdRespo() == id).filter(promotion -> promotion.getStatut().equals(Enum.Statut.ACCEPTED.toString())).collect(Collectors.toList());
+            if (promotionList.size() != 0) {
+                promotionList.forEach(promotion -> System.out.println(promotion.getStatut()  ) );
+            return promotionList;
+
+        }
+
+        return null;
+    }
+
 
     boolean acceptPromotion(int id, Commentaires commentaires) {
         if (promotionDAO.acceptPromo(id)) {
             new CommentaireDAO().save(commentaires);
+            return true;
+        }
+        return false;
+
+    }
+    boolean refusPromotion(int id) {
+        if (promotionDAO.refusPromo(id)) {
             return true;
         }
         return false;

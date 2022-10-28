@@ -23,10 +23,18 @@ public class PromotionDAO implements IDAO<Promotion> {
     }
 
     public Boolean acceptPromo(long id) {
-        Query query = JPA.entityManager().createQuery("UPDATE Promotion SET statut =:statut WHERE id =:id ");
-        query.setParameter("statut", Enum.Statut.ACCEPTED.toString());
-        query.setParameter("id", id);
-        return query.executeUpdate() == 1;
+        JPA.serv(entityManager -> entityManager.createNativeQuery("UPDATE Promotion SET statut =:statut WHERE id =:id ")
+       .setParameter("statut", Enum.Statut.ACCEPTED.toString())
+        .setParameter("id", id).executeUpdate());
+
+        return true;
+    }
+    public Boolean refusPromo(long id) {
+        JPA.serv(entityManager -> entityManager.createNativeQuery("UPDATE Promotion SET statut =:statut WHERE id =:id ")
+                .setParameter("statut",Enum.Statut.REFUSED.toString())
+                .setParameter("id", id).executeUpdate());
+
+        return true;
     }
 
 
