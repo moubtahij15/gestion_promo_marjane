@@ -16,10 +16,10 @@ class PromotionControllerTest {
     @Test
     void ajouterPromotionCategorie() {
         Promotion promotion = new Promotion();
-        promotion.setDateDebut(Date.valueOf(LocalDate.of(2022, 2, 1)));
-        promotion.setDateFin(Date.valueOf(LocalDate.of(2022, 2, 11)));
-        promotion.setPoucentage(30.0);
-        promotion.setIdCategorie(1);
+        promotion.setDateDebut(Date.valueOf(LocalDate.of(2022, 10, 28)));
+        promotion.setDateFin(Date.valueOf(LocalDate.of(2022, 10, 30)));
+        promotion.setPoucentage(20.0);
+        promotion.setIdCategorie(4);
         promotion.setIdStore(1);
         promotion.setStatut(Enum.Statut.PENDING.toString());
         promotion.setType(Enum.Type.CATEGORIE.toString());
@@ -47,23 +47,29 @@ class PromotionControllerTest {
     void pendingPromotionByResponsable() {
 
 //        promotionController.pendingPromotionByResponsable(36);
-        assertNotNull(promotionController.pendingPromotionByResponsable(36));
+        assertNotNull(promotionController.pendingPromotionByResponsable(39));
     }
 
     @Test
     void acceptPromotion() {
-        assertTrue(promotionController.acceptPromotion(9, new Commentaires("Bien validé", 9)));
+        assertTrue(promotionController.acceptPromotion(14, new Commentaires("Bien validé", 9)));
     }
 
     @Test
     void refusPromotion() {
-        assertTrue(promotionController.refusPromotion(8 ));
+        assertTrue(promotionController.refusPromotion(8));
 
     }
 
     @Test
     void acceptedPromotionByResponsable() {
-        assertNotNull(promotionController.acceptedPromotionByResponsable(36));
+        assertNotNull(promotionController.acceptedPromotionByResponsable(39));
+
+    }
+
+    @Test
+    void promotionByStore() {
+        assertNotNull(promotionController.promotionByStore(1, Enum.Statut.ACCEPTED.toString()));
 
     }
 }

@@ -186,4 +186,19 @@ public class Promotion {
     public void setStoreByIdStore(Store storeByIdStore) {
         this.storeByIdStore = storeByIdStore;
     }
+
+    @Override
+    public String toString() {
+        return "Promotion{" +
+                "id=" + id +
+                ", poucentage=" + poucentage +
+                ", type='" + type + '\'' +
+                ", dateDebut=" + dateDebut +
+                ", dateFin=" + dateFin +
+                ", idCategorie=" + idCategorie +
+                ", idSousCategorie=" + idSousCategorie +
+                ", idStore=" + idStore +
+                ", statut='" + statut + '\'' +
+                '}';
+    }
 }

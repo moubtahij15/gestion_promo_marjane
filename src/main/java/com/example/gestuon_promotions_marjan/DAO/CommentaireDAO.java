@@ -7,8 +7,9 @@ import java.util.List;
 
 public class CommentaireDAO implements IDAO<Commentaires>{
     @Override
-    public void save(Commentaires commentaires) {
+    public Commentaires save(Commentaires commentaires) {
         JPA.serv(entityManager -> entityManager.persist(commentaires));
+        return commentaires;
     }
 
     @Override
@@ -27,12 +28,12 @@ public class CommentaireDAO implements IDAO<Commentaires>{
     }
 
     @Override
-    public void update(Commentaires T) {
-
+    public Commentaires update(Commentaires T) {
+        return null;
     }
 
     @Override
-    public void delete(long id) {
-
+    public Commentaires delete(long id) {
+        return null;
     }
 }

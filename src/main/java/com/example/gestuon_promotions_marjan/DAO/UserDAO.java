@@ -11,8 +11,14 @@ import java.util.List;
 public class UserDAO implements IDAO<User> {
     @Override
 //    @Transactional
-    public void save(User user) {
+    public User save(User user) {
         JPA.serv(em -> em.persist(user));
+        return user;
+    }
+
+    public User saves(User user) {
+        JPA.serv(em -> em.persist(user));
+        return user;
     }
 
 
@@ -57,15 +63,17 @@ public class UserDAO implements IDAO<User> {
 
 
     @Override
-    public void update(User produit) {
-        JPA.serv(em->em.merge(produit));
+    public User update(User user) {
+        JPA.serv(em -> em.merge(user));
+        return user;
     }
 
     @Override
-    public void delete(long id) {
+    public User delete(long id) {
 
-            User p = JPA.entityManager().find(User.class, id);
-            JPA.serv(entityManager -> entityManager.remove(p));
+        User p = JPA.entityManager().find(User.class, id);
+        JPA.serv(entityManager -> entityManager.remove(p));
+        return p;
     }
 
 
@@ -74,9 +82,14 @@ public class UserDAO implements IDAO<User> {
         Query query = JPA.entityManager().createQuery("select user from User user where user.role=:role and user.email=:email");
         query.setParameter("role", user.getRole());
         query.setParameter("email", user.getEmail());
-        user1 = (User) query.getResultList();
+
+
+//        if ( (Integer) query.getSingleResult() == 0) {
+//            return false;
+//        }
+        user1 = (User) query.getSingleResult();
 //
-        if (user != null && Hash.MD5(user.getPass()).equals(user1.getPass())) {
+        if (user1 != null && Hash.MD5(user.getPass()).equals(user1.getPass())) {
             return true;
         }
         return false;

@@ -11,8 +11,9 @@ public class PromotionDAO implements IDAO<Promotion> {
 
 
     @Override
-    public void save(Promotion promotion) {
+    public Promotion save(Promotion promotion) {
         JPA.serv(em -> em.persist(promotion));
+        return promotion;
 
     }
 
@@ -49,17 +50,16 @@ public class PromotionDAO implements IDAO<Promotion> {
     }
 
     @Override
-    public void update(Promotion T) {
-
+    public Promotion update(Promotion T) {
+        return null;
     }
-
 
     @Override
-    public void delete(long id) {
-
+    public Promotion delete(long id) {
+        return null;
     }
 
-//    public void displayUser(ArrayList<Promotion> userArrayList) {
+    //    public void displayUser(ArrayList<Promotion> userArrayList) {
 //        for (Promotion currentUser : userArrayList) {
 //            System.out.println("User {" + currentUser.getId()
 //                    + " , name='" + currentUser.getName() + '\'' +

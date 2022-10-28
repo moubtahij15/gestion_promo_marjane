@@ -15,36 +15,25 @@ public class SuperAdminController {
 
     public SuperAdminController() {
         this.userDAO = new UserDAO();
-        this.superAdminDAO=new SuperAdminDAO();
+        this.superAdminDAO = new SuperAdminDAO();
     }
 
-    void addAdmin(User admin) {
-        userDAO.save(admin);
-        String confirmMsg = "email : " + admin.getEmail() + "\n pass : " + admin.getPass();
-        SendMail.sendMessage(admin.getEmail(), "Confirmation reservation", confirmMsg);
+    boolean addAdmin(User admin) {
+        if ((userDAO.save(admin) != null)) {
+            String confirmMsg = "email : " + admin.getEmail() + "\n pass : " + admin.getPass();
+            SendMail.sendMessage(admin.getEmail(), "Confirmation reservation", confirmMsg);
+            return true;
+        }
+        return false;
     }
 
-    void login(SuperAdmin superAdmin) throws Exception {
+    boolean login(SuperAdmin superAdmin) throws Exception {
         if (superAdminDAO.login(superAdmin)) {
-            System.out.println("ok");
-            System.out.println(new PromotionDAO().findAll());
+            return true;
         } else {
-            System.out.println("no");
+            return false;
         }
     }
-
-    public static void main(String[] args) throws Exception {
-            SuperAdminController sp = new SuperAdminController();
-            SuperAdmin a = new SuperAdmin();
-            a.setEmail("otman@gmail.com");
-            a.setPass("admin");
-            sp.login(a);
-    }
-
-
-
-
-
 
 
 }

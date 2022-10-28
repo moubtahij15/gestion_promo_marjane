@@ -1,7 +1,9 @@
 package com.example.gestuon_promotions_marjan.controllers;
 
+import com.example.gestuon_promotions_marjan.DAO.CategorieDAO;
 import com.example.gestuon_promotions_marjan.DAO.UserDAO;
 import com.example.gestuon_promotions_marjan.Entity.User;
+import com.example.gestuon_promotions_marjan.helpers.Hash;
 import com.example.gestuon_promotions_marjan.helpers.SendMail;
 
 public class AdminController {
@@ -12,19 +14,16 @@ public class AdminController {
     public AdminController() {
         this.userDAO = new UserDAO();
     }
-    void addRespo(User resp) {
-        userDAO.save(resp);
-        String confirmMsg = "email : " + resp.getEmail() + "\n pass : " + resp.getPass();
-        SendMail.sendMessage(resp.getEmail(), "Confirmation reservation", confirmMsg);
+
+    boolean addRespo(User resp, int idCategoie) throws Exception {
+        resp.setPass(Hash.MD5(resp.getPass()));
+        return new CategorieDAO().asignCategorieRespnsable(idCategoie, userDAO.save(resp).getId());
+
+
     }
 
-    void login(User resp) throws Exception {
-        if (userDAO.login(resp)) {
-            System.out.println("Bien passer");
-//            System.out.println(new PromotionDAO().findAll());
-        } else {
-            System.out.println("no");
-        }
+    boolean login(User resp) throws Exception {
+        return userDAO.login(resp);
     }
 
 }
