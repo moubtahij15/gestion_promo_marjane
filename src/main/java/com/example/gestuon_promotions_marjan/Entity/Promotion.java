@@ -15,6 +15,7 @@ public class Promotion {
     private Integer idCategorie;
     private Integer idSousCategorie;
     private Integer idStore;
+    private Float fedelite;
     private String statut;
     private Collection<Commentaires> commentairesById;
     private Categorie categorieByIdCategorie;
@@ -50,6 +51,16 @@ public class Promotion {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Basic
+    @Column(name = "fedelite", nullable = true, length = -1)
+    public Float getFedelite() {
+        return fedelite;
+    }
+
+    public void setFedelite(Float fedelite) {
+        this.fedelite = fedelite;
     }
 
     @Basic
@@ -158,7 +169,7 @@ public class Promotion {
     }
 
     @ManyToOne
-    @JoinColumn(name = "id_categorie", referencedColumnName = "id",insertable = false, updatable = false)
+    @JoinColumn(name = "id_categorie", referencedColumnName = "id", insertable = false, updatable = false)
     public Categorie getCategorieByIdCategorie() {
         return categorieByIdCategorie;
     }
@@ -168,7 +179,7 @@ public class Promotion {
     }
 
     @ManyToOne
-    @JoinColumn(name = "id_sous_categorie", referencedColumnName = "id",insertable = false, updatable = false)
+    @JoinColumn(name = "id_sous_categorie", referencedColumnName = "id", insertable = false, updatable = false)
     public SousCategorie getSousCategorieByIdSousCategorie() {
         return sousCategorieByIdSousCategorie;
     }
@@ -178,7 +189,7 @@ public class Promotion {
     }
 
     @ManyToOne
-    @JoinColumn(name = "id_store", referencedColumnName = "id",insertable = false, updatable = false)
+    @JoinColumn(name = "id_store", referencedColumnName = "id", insertable = false, updatable = false)
     public Store getStoreByIdStore() {
         return storeByIdStore;
     }
@@ -198,6 +209,7 @@ public class Promotion {
                 ", idCategorie=" + idCategorie +
                 ", idSousCategorie=" + idSousCategorie +
                 ", idStore=" + idStore +
+                ", fedelite=" + fedelite +
                 ", statut='" + statut + '\'' +
                 '}';
     }

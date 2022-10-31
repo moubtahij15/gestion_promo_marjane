@@ -16,6 +16,14 @@ public class User {
     private Collection<Categorie> categoriesById;
     private Store storeByIdStore;
 
+    public User(String email, String pass) {
+        this.email = email;
+        this.pass = pass;
+    }
+
+    public User() {
+    }
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
@@ -122,5 +130,14 @@ public class User {
 
     public void setStoreByIdStore(Store storeByIdStore) {
         this.storeByIdStore = storeByIdStore;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

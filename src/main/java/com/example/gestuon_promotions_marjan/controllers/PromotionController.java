@@ -7,6 +7,9 @@ import com.example.gestuon_promotions_marjan.Entity.Categorie;
 import com.example.gestuon_promotions_marjan.Entity.Commentaires;
 import com.example.gestuon_promotions_marjan.Entity.Promotion;
 import com.example.gestuon_promotions_marjan.helpers.Enum;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -31,6 +34,7 @@ public class PromotionController {
             return false;
         }
 
+        promotion.setFedelite((float) (promotion.getPoucentage() * 10));
         return promotionDAO.save(promotion) != null;
 
     }
@@ -39,10 +43,12 @@ public class PromotionController {
         Categorie categorie = new CategorieDAO().findBySouCategorie(promotion.getIdSousCategorie());
         promotion.setIdCategorie(categorie.getId());
 //        System.out.println(categorie.getNom());
+        promotion.setFedelite((float) (promotion.getPoucentage() * 10));
+
         return promotionDAO.save(promotion) != null;
     }
 
-    List<Promotion> pendingPromotionByResponsable(int id) {
+     public List<Promotion> pendingPromotionByResponsable(int id) {
         LocalTime now = LocalTime.now();
         LocalTime startTime = LocalTime.parse("08:00");
         LocalTime endTime = LocalTime.parse("16:00");
@@ -66,7 +72,7 @@ public class PromotionController {
         return null;
     }
 
-    List<Promotion> acceptedPromotionByResponsable(int id) {
+    public List<Promotion> acceptedPromotionByResponsable(int id) {
 
         List<Promotion> promotionList = promotionDAO.findAll();
         promotionList = promotionList.stream().filter(promotion -> promotion.getCategorieByIdCategorie().getIdRespo() == id)
@@ -81,7 +87,7 @@ public class PromotionController {
         return null;
     }
 
-    List<Promotion> promotionByStore(int id, String statut) {
+   public   List<Promotion> promotionByStoreStatut(int id, String statut) {
 
 //            System.out.println("eee");
         List<Promotion> promotionList = promotionDAO.findAll();
@@ -89,6 +95,24 @@ public class PromotionController {
                 .filter(promotion -> promotion.getIdStore() == id)
                 .filter(promotion -> promotion.getStatut().equals(statut))
                 .collect(Collectors.toList());
+        if (promotionList.size() != 0) {
+            promotionList.forEach(promotion -> System.out.println(promotion));
+            return promotionList;
+
+        }
+        return null;
+
+
+    }
+    public   List<Promotion> promotionByStore(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession(false);
+
+//            System.out.println("eee");
+        List<Promotion> promotionList = promotionDAO.findAll();
+        promotionList = promotionList.stream()
+                .filter(promotion -> promotion.getIdStore() == session.getAttribute("id_store"))
+                .collect(Collectors.toList());
+        System.out.println(session.getAttribute("id_store"));
         if (promotionList.size() != 0) {
             promotionList.forEach(promotion -> System.out.println(promotion));
             return promotionList;

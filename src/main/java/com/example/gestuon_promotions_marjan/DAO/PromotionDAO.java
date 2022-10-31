@@ -12,6 +12,7 @@ public class PromotionDAO implements IDAO<Promotion> {
 
     @Override
     public Promotion save(Promotion promotion) {
+        int fedilité = (int) (promotion.getPoucentage() * 10);
         JPA.serv(em -> em.persist(promotion));
         return promotion;
 
@@ -25,14 +26,15 @@ public class PromotionDAO implements IDAO<Promotion> {
 
     public Boolean acceptPromo(long id) {
         JPA.serv(entityManager -> entityManager.createNativeQuery("UPDATE Promotion SET statut =:statut WHERE id =:id ")
-       .setParameter("statut", Enum.Statut.ACCEPTED.toString())
-        .setParameter("id", id).executeUpdate());
+                .setParameter("statut", Enum.Statut.ACCEPTED.toString())
+                .setParameter("id", id).executeUpdate());
 
         return true;
     }
+
     public Boolean refusPromo(long id) {
         JPA.serv(entityManager -> entityManager.createNativeQuery("UPDATE Promotion SET statut =:statut WHERE id =:id ")
-                .setParameter("statut",Enum.Statut.REFUSED.toString())
+                .setParameter("statut", Enum.Statut.REFUSED.toString())
                 .setParameter("id", id).executeUpdate());
 
         return true;

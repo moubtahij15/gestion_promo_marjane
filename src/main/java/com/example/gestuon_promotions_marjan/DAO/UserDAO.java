@@ -77,22 +77,23 @@ public class UserDAO implements IDAO<User> {
     }
 
 
-    public boolean login(User user) throws Exception {
+    public User login(User user) throws Exception {
         User user1 = new User();
-        Query query = JPA.entityManager().createQuery("select user from User user where user.role=:role and user.email=:email");
-        query.setParameter("role", user.getRole());
-        query.setParameter("email", user.getEmail());
+        try {
+            Query query = JPA.entityManager().createQuery("select user from User user where user.role=:role and user.email=:email");
+            query.setParameter("role", user.getRole());
+            query.setParameter("email", user.getEmail());
+            user1 = (User) query.getSingleResult();
 
+        } catch (Exception e) {
+            return null;
+        }
 
-//        if ( (Integer) query.getSingleResult() == 0) {
-//            return false;
-//        }
-        user1 = (User) query.getSingleResult();
 //
         if (user1 != null && Hash.MD5(user.getPass()).equals(user1.getPass())) {
-            return true;
+            return user1;
         }
-        return false;
+        return null;
     }
 }
 

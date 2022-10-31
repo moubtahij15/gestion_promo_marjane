@@ -67,9 +67,9 @@ class PromotionControllerTest {
 
     }
 
-    @Test
-    void promotionByStore() {
-        assertNotNull(promotionController.promotionByStore(1, Enum.Statut.ACCEPTED.toString()));
-
-    }
+//    @Test
+//    void promotionByStore() {
+//        assertNotNull(promotionController.promotionByStore(1, Enum.Statut.ACCEPTED.toString()));
+//
+//    }
 }
