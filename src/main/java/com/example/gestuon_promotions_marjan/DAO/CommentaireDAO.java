@@ -23,7 +23,7 @@ public class CommentaireDAO implements IDAO<Commentaires>{
     }
 
     @Override
-    public Commentaires findByid(long id) {
+    public Commentaires findByid(int id) {
         return null;
     }
 

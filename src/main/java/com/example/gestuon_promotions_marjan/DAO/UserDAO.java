@@ -56,7 +56,7 @@ public class UserDAO implements IDAO<User> {
     }
 
     @Override
-    public User findByid(long id) {
+    public User findByid(int id) {
 
         return JPA.entityManager().find(User.class, id);
     }
@@ -80,8 +80,8 @@ public class UserDAO implements IDAO<User> {
     public User login(User user) throws Exception {
         User user1 = new User();
         try {
-            Query query = JPA.entityManager().createQuery("select user from User user where user.role=:role and user.email=:email");
-            query.setParameter("role", user.getRole());
+
+            Query query = JPA.entityManager().createQuery("select user from User user where  user.email=:email");
             query.setParameter("email", user.getEmail());
             user1 = (User) query.getSingleResult();
 

@@ -26,7 +26,7 @@ public class CategorieDAO implements IDAO<Categorie> {
     }
 
     @Override
-    public Categorie findByid(long id) {
+    public Categorie findByid(int id) {
         return JPA.entityManager().find(Categorie.class, id);
     }
 

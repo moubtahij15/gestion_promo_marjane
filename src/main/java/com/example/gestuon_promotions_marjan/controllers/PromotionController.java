@@ -34,7 +34,7 @@ public class PromotionController {
             return false;
         }
 
-        promotion.setFedelite((float) (promotion.getPoucentage() * 10));
+        promotion.setFedelite((Double) (promotion.getPoucentage() * 10));
         return promotionDAO.save(promotion) != null;
 
     }
@@ -43,7 +43,7 @@ public class PromotionController {
         Categorie categorie = new CategorieDAO().findBySouCategorie(promotion.getIdSousCategorie());
         promotion.setIdCategorie(categorie.getId());
 //        System.out.println(categorie.getNom());
-        promotion.setFedelite((float) (promotion.getPoucentage() * 10));
+        promotion.setFedelite((Double) (promotion.getPoucentage() * 10));
 
         return promotionDAO.save(promotion) != null;
     }
@@ -56,7 +56,7 @@ public class PromotionController {
 //            System.out.println("eee");
             List<Promotion> promotionList = promotionDAO.findAll();
             promotionList = promotionList.stream()
-                    .filter(promotion -> promotion.getCategorieByIdCategorie().getIdRespo() == id)
+//                    .filter(promotion -> promotion. == id) for each reso
                     .filter(promotion -> promotion.getStatut().equals(Enum.Statut.PENDING.toString()))
                     .filter(promotion -> (promotion.getDateDebut().toLocalDate().compareTo(LocalDate.now()) <= 0))
                     .filter((promotion -> LocalDate.now().isBefore(promotion.getDateFin().toLocalDate())))
@@ -75,7 +75,8 @@ public class PromotionController {
     public List<Promotion> acceptedPromotionByResponsable(int id) {
 
         List<Promotion> promotionList = promotionDAO.findAll();
-        promotionList = promotionList.stream().filter(promotion -> promotion.getCategorieByIdCategorie().getIdRespo() == id)
+        promotionList = promotionList.stream()
+//                .filter(promotion -> promotion.getCategorieByIdCategorie().getIdRespo() == id)
                 .filter(promotion -> promotion.getStatut().equals(Enum.Statut.ACCEPTED.toString()))
                 .collect(Collectors.toList());
         if (promotionList.size() != 0) {
@@ -112,7 +113,7 @@ public class PromotionController {
         promotionList = promotionList.stream()
                 .filter(promotion -> promotion.getIdStore() == session.getAttribute("id_store"))
                 .collect(Collectors.toList());
-        System.out.println(session.getAttribute("id_store"));
+            System.out.println(session.getAttribute("id_store"));
         if (promotionList.size() != 0) {
             promotionList.forEach(promotion -> System.out.println(promotion));
             return promotionList;

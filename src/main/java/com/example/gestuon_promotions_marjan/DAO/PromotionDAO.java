@@ -47,7 +47,7 @@ public class PromotionDAO implements IDAO<Promotion> {
     }
 
     @Override
-    public Promotion findByid(long id) {
+    public Promotion findByid(int id) {
         return null;
     }
 

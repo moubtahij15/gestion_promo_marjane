@@ -15,8 +15,8 @@ public class Promotion {
     private Integer idCategorie;
     private Integer idSousCategorie;
     private Integer idStore;
-    private Float fedelite;
     private String statut;
+    private Double fedelite;
     private Collection<Commentaires> commentairesById;
     private Categorie categorieByIdCategorie;
     private SousCategorie sousCategorieByIdSousCategorie;
@@ -51,16 +51,6 @@ public class Promotion {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    @Basic
-    @Column(name = "fedelite", nullable = true, length = -1)
-    public Float getFedelite() {
-        return fedelite;
-    }
-
-    public void setFedelite(Float fedelite) {
-        this.fedelite = fedelite;
     }
 
     @Basic
@@ -123,6 +113,16 @@ public class Promotion {
         this.statut = statut;
     }
 
+    @Basic
+    @Column(name = "fedelite", nullable = true, precision = 0)
+    public Double getFedelite() {
+        return fedelite;
+    }
+
+    public void setFedelite(Double fedelite) {
+        this.fedelite = fedelite;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -141,6 +141,7 @@ public class Promotion {
             return false;
         if (idStore != null ? !idStore.equals(promotion.idStore) : promotion.idStore != null) return false;
         if (statut != null ? !statut.equals(promotion.statut) : promotion.statut != null) return false;
+        if (fedelite != null ? !fedelite.equals(promotion.fedelite) : promotion.fedelite != null) return false;
 
         return true;
     }
@@ -156,6 +157,7 @@ public class Promotion {
         result = 31 * result + (idSousCategorie != null ? idSousCategorie.hashCode() : 0);
         result = 31 * result + (idStore != null ? idStore.hashCode() : 0);
         result = 31 * result + (statut != null ? statut.hashCode() : 0);
+        result = 31 * result + (fedelite != null ? fedelite.hashCode() : 0);
         return result;
     }
 
@@ -169,7 +171,7 @@ public class Promotion {
     }
 
     @ManyToOne
-    @JoinColumn(name = "id_categorie", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "id_categorie", referencedColumnName = "id",insertable = false, updatable = false)
     public Categorie getCategorieByIdCategorie() {
         return categorieByIdCategorie;
     }
@@ -179,7 +181,7 @@ public class Promotion {
     }
 
     @ManyToOne
-    @JoinColumn(name = "id_sous_categorie", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "id_sous_categorie", referencedColumnName = "id",insertable = false, updatable = false)
     public SousCategorie getSousCategorieByIdSousCategorie() {
         return sousCategorieByIdSousCategorie;
     }
@@ -189,28 +191,12 @@ public class Promotion {
     }
 
     @ManyToOne
-    @JoinColumn(name = "id_store", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "id_store", referencedColumnName = "id",insertable = false, updatable = false)
     public Store getStoreByIdStore() {
         return storeByIdStore;
     }
 
     public void setStoreByIdStore(Store storeByIdStore) {
         this.storeByIdStore = storeByIdStore;
-    }
-
-    @Override
-    public String toString() {
-        return "Promotion{" +
-                "id=" + id +
-                ", poucentage=" + poucentage +
-                ", type='" + type + '\'' +
-                ", dateDebut=" + dateDebut +
-                ", dateFin=" + dateFin +
-                ", idCategorie=" + idCategorie +
-                ", idSousCategorie=" + idSousCategorie +
-                ", idStore=" + idStore +
-                ", fedelite=" + fedelite +
-                ", statut='" + statut + '\'' +
-                '}';
     }
 }

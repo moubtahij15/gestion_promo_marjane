@@ -9,7 +9,9 @@
 
 
     <persistence-unit name="marjane">
+        <class>com.example.gestuon_promotions_marjan.Entity.ResponsableRayon</class>
         <class>com.example.gestuon_promotions_marjan.Entity.Categorie</class>
+        <class>com.example.gestuon_promotions_marjan.Entity.CategorieStore</class>
         <class>com.example.gestuon_promotions_marjan.Entity.Commentaires</class>
         <class>com.example.gestuon_promotions_marjan.Entity.Promotion</class>
         <class>com.example.gestuon_promotions_marjan.Entity.SousCategorie</class>
@@ -17,6 +19,7 @@
         <class>com.example.gestuon_promotions_marjan.Entity.SuperAdmin</class>
         <class>com.example.gestuon_promotions_marjan.Entity.User</class>
         <class>com.example.gestuon_promotions_marjan.Entity.Ville</class>
+
         <properties>
             <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/products_management"/>
             <property name="hibernate.connection.username" value="postgres"/>

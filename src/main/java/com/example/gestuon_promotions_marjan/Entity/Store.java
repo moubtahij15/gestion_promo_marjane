@@ -9,6 +9,8 @@ public class Store {
     private int id;
     private String nom;
     private Integer idVille;
+    private Collection<ResponsableRayon> responsableRayonsById;
+    private Collection<CategorieStore> categorieStoresById;
     private Collection<Promotion> promotionsById;
     private Ville villeByIdVille;
     private Collection<User> usersById;
@@ -64,6 +66,24 @@ public class Store {
         result = 31 * result + (nom != null ? nom.hashCode() : 0);
         result = 31 * result + (idVille != null ? idVille.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "storeByIdStore")
+    public Collection<ResponsableRayon> getResponsableRayonsById() {
+        return responsableRayonsById;
+    }
+
+    public void setResponsableRayonsById(Collection<ResponsableRayon> responsableRayonsById) {
+        this.responsableRayonsById = responsableRayonsById;
+    }
+
+    @OneToMany(mappedBy = "storeByIdStore")
+    public Collection<CategorieStore> getCategorieStoresById() {
+        return categorieStoresById;
+    }
+
+    public void setCategorieStoresById(Collection<CategorieStore> categorieStoresById) {
+        this.categorieStoresById = categorieStoresById;
     }
 
     @OneToMany(mappedBy = "storeByIdStore")

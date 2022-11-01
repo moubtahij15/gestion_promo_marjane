@@ -5,12 +5,11 @@ import jakarta.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "categorie",schema = "public",catalog = "products_management")
 public class Categorie {
     private int id;
     private String nom;
-    private Integer idRespo;
-    private User userByIdRespo;
+    private Collection<ResponsableRayon> responsableRayonsById;
+    private Collection<CategorieStore> categorieStoresById;
     private Collection<Promotion> promotionsById;
     private Collection<SousCategorie> sousCategoriesById;
 
@@ -35,16 +34,6 @@ public class Categorie {
         this.nom = nom;
     }
 
-    @Basic
-    @Column(name = "id_respo", nullable = true)
-    public Integer getIdRespo() {
-        return idRespo;
-    }
-
-    public void setIdRespo(Integer idRespo) {
-        this.idRespo = idRespo;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -54,7 +43,6 @@ public class Categorie {
 
         if (id != categorie.id) return false;
         if (nom != null ? !nom.equals(categorie.nom) : categorie.nom != null) return false;
-        if (idRespo != null ? !idRespo.equals(categorie.idRespo) : categorie.idRespo != null) return false;
 
         return true;
     }
@@ -63,18 +51,25 @@ public class Categorie {
     public int hashCode() {
         int result = id;
         result = 31 * result + (nom != null ? nom.hashCode() : 0);
-        result = 31 * result + (idRespo != null ? idRespo.hashCode() : 0);
         return result;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "id_respo", referencedColumnName = "id",insertable = false, updatable = false)
-    public User getUserByIdRespo() {
-        return userByIdRespo;
+    @OneToMany(mappedBy = "categorieByIdCategorie")
+    public Collection<ResponsableRayon> getResponsableRayonsById() {
+        return responsableRayonsById;
     }
 
-    public void setUserByIdRespo(User userByIdRespo) {
-        this.userByIdRespo = userByIdRespo;
+    public void setResponsableRayonsById(Collection<ResponsableRayon> responsableRayonsById) {
+        this.responsableRayonsById = responsableRayonsById;
+    }
+
+    @OneToMany(mappedBy = "categorieByIdCategorie")
+    public Collection<CategorieStore> getCategorieStoresById() {
+        return categorieStoresById;
+    }
+
+    public void setCategorieStoresById(Collection<CategorieStore> categorieStoresById) {
+        this.categorieStoresById = categorieStoresById;
     }
 
     @OneToMany(mappedBy = "categorieByIdCategorie")

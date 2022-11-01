@@ -3,21 +3,32 @@ package com.example.gestuon_promotions_marjan.Entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "user", schema = "public", catalog = "products_management")
-public class User {
+@Table(name = "responsable_Rayon", schema = "public", catalog = "products_management")
+public class ResponsableRayon {
     private int id;
     private String name;
     private String email;
     private String pass;
     private Integer idStore;
-    private String role;
+    private Integer idCategorie;
     private Store storeByIdStore;
+    private Categorie categorieByIdCategorie;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
+    }
+
+    public ResponsableRayon(String name, String email, String pass, Integer idStore) {
+        this.name = name;
+        this.email = email;
+        this.pass = pass;
+        this.idStore = idStore;
+    }
+
+    public ResponsableRayon() {
     }
 
     public void setId(int id) {
@@ -65,13 +76,13 @@ public class User {
     }
 
     @Basic
-    @Column(name = "role", nullable = true, length = -1)
-    public String getRole() {
-        return role;
+    @Column(name = "id_categorie", nullable = true)
+    public Integer getIdCategorie() {
+        return idCategorie;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setIdCategorie(Integer idCategorie) {
+        this.idCategorie = idCategorie;
     }
 
     @Override
@@ -79,14 +90,14 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        User user = (User) o;
+        ResponsableRayon that = (ResponsableRayon) o;
 
-        if (id != user.id) return false;
-        if (name != null ? !name.equals(user.name) : user.name != null) return false;
-        if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        if (pass != null ? !pass.equals(user.pass) : user.pass != null) return false;
-        if (idStore != null ? !idStore.equals(user.idStore) : user.idStore != null) return false;
-        if (role != null ? !role.equals(user.role) : user.role != null) return false;
+        if (id != that.id) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (email != null ? !email.equals(that.email) : that.email != null) return false;
+        if (pass != null ? !pass.equals(that.pass) : that.pass != null) return false;
+        if (idStore != null ? !idStore.equals(that.idStore) : that.idStore != null) return false;
+        if (idCategorie != null ? !idCategorie.equals(that.idCategorie) : that.idCategorie != null) return false;
 
         return true;
     }
@@ -98,7 +109,7 @@ public class User {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (pass != null ? pass.hashCode() : 0);
         result = 31 * result + (idStore != null ? idStore.hashCode() : 0);
-        result = 31 * result + (role != null ? role.hashCode() : 0);
+        result = 31 * result + (idCategorie != null ? idCategorie.hashCode() : 0);
         return result;
     }
 
@@ -110,5 +121,25 @@ public class User {
 
     public void setStoreByIdStore(Store storeByIdStore) {
         this.storeByIdStore = storeByIdStore;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "id_categorie", referencedColumnName = "id",insertable = false, updatable = false)
+    public Categorie getCategorieByIdCategorie() {
+        return categorieByIdCategorie;
+    }
+
+    public void setCategorieByIdCategorie(Categorie categorieByIdCategorie) {
+        this.categorieByIdCategorie = categorieByIdCategorie;
+    }
+
+    @Override
+    public String toString() {
+        return "ResponsableRayon{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", idStore=" + idStore +
+                ", categorieByIdCategorie=" + categorieByIdCategorie.getNom() +
+                '}';
     }
 }

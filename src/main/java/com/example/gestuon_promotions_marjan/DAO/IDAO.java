@@ -9,7 +9,7 @@ public interface IDAO<T> {
 
     public List<T> findByDesignation(String mc);
 
-    public T findByid(long id);
+    public T findByid(int id);
 
     public T update(T T);
 

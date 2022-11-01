@@ -3,21 +3,11 @@ package com.example.gestuon_promotions_marjan.Entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "commentaires",schema = "public",catalog = "products_management")
-
 public class Commentaires {
     private int id;
     private String commentaire;
     private Integer idPromo;
     private Promotion promotionByIdPromo;
-
-    public Commentaires() {
-    }
-
-    public Commentaires(String commentaire, Integer idPromo) {
-        this.commentaire = commentaire;
-        this.idPromo = idPromo;
-    }
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
