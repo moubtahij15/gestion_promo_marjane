@@ -3,15 +3,17 @@ package com.example.gestuon_promotions_marjan.Entity;
 import jakarta.persistence.*;
 
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Categorie {
     private int id;
     private String nom;
-    private Collection<ResponsableRayon> responsableRayonsById;
-    private Collection<CategorieStore> categorieStoresById;
     private Collection<Promotion> promotionsById;
+    private ResponsableRayon responsableRayonsById;
     private Collection<SousCategorie> sousCategoriesById;
+
+    private List<Store> storeById;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -34,42 +36,18 @@ public class Categorie {
         this.nom = nom;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Categorie categorie = (Categorie) o;
-
-        if (id != categorie.id) return false;
-        if (nom != null ? !nom.equals(categorie.nom) : categorie.nom != null) return false;
-
-        return true;
+    @ManyToMany(targetEntity = Store.class, cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "categorie_store",
+            joinColumns = {@JoinColumn(name = "id_categorie", insertable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "id_store", insertable = false, updatable = false)}
+    )
+    public List<Store> getStoreById() {
+        return storeById;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (nom != null ? nom.hashCode() : 0);
-        return result;
-    }
-
-    @OneToMany(mappedBy = "categorieByIdCategorie")
-    public Collection<ResponsableRayon> getResponsableRayonsById() {
-        return responsableRayonsById;
-    }
-
-    public void setResponsableRayonsById(Collection<ResponsableRayon> responsableRayonsById) {
-        this.responsableRayonsById = responsableRayonsById;
-    }
-
-    @OneToMany(mappedBy = "categorieByIdCategorie")
-    public Collection<CategorieStore> getCategorieStoresById() {
-        return categorieStoresById;
-    }
-
-    public void setCategorieStoresById(Collection<CategorieStore> categorieStoresById) {
-        this.categorieStoresById = categorieStoresById;
+    public void setStoreById(List<Store> storeById) {
+        this.storeById = storeById;
     }
 
     @OneToMany(mappedBy = "categorieByIdCategorie")
@@ -79,6 +57,16 @@ public class Categorie {
 
     public void setPromotionsById(Collection<Promotion> promotionsById) {
         this.promotionsById = promotionsById;
+    }
+
+    @OneToOne(mappedBy = "categorieByIdCategorie")
+
+    public ResponsableRayon getResponsableRayonsById() {
+        return responsableRayonsById;
+    }
+
+    public void setResponsableRayonsById(ResponsableRayon responsableRayonsById) {
+        this.responsableRayonsById = responsableRayonsById;
     }
 
     @OneToMany(mappedBy = "categorieByIdCategorie")

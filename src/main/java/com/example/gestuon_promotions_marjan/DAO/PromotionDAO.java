@@ -3,6 +3,8 @@ package com.example.gestuon_promotions_marjan.DAO;
 import com.example.gestuon_promotions_marjan.Entity.Promotion;
 import com.example.gestuon_promotions_marjan.helpers.Enum;
 import com.example.gestuon_promotions_marjan.helpers.JPA;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 
 import java.util.List;
@@ -12,20 +14,21 @@ public class PromotionDAO implements IDAO<Promotion> {
 
     @Override
     public Promotion save(Promotion promotion) {
-        int fedilité = (int) (promotion.getPoucentage() * 10);
-        JPA.serv(em -> em.persist(promotion));
+        new JPA().serv(em -> em.persist(promotion));
         return promotion;
 
     }
 
     @Override
     public List<Promotion> findAll() {
-        Query query = JPA.entityManager().createQuery("select promotion from Promotion promotion ");
+//        EntityManager em = Persistence.createEntityManagerFactory("marjane").createEntityManager();
+
+        Query query = new JPA().getEm().createQuery("select promotion from Promotion promotion  ORDER BY promotion.id");
         return query.getResultList();
     }
 
     public Boolean acceptPromo(long id) {
-        JPA.serv(entityManager -> entityManager.createNativeQuery("UPDATE Promotion SET statut =:statut WHERE id =:id ")
+        new JPA().serv(entityManager -> entityManager.createNativeQuery("UPDATE Promotion SET statut =:statut WHERE id =:id ")
                 .setParameter("statut", Enum.Statut.ACCEPTED.toString())
                 .setParameter("id", id).executeUpdate());
 
@@ -33,7 +36,7 @@ public class PromotionDAO implements IDAO<Promotion> {
     }
 
     public Boolean refusPromo(long id) {
-        JPA.serv(entityManager -> entityManager.createNativeQuery("UPDATE Promotion SET statut =:statut WHERE id =:id ")
+        new JPA().serv(entityManager -> entityManager.createNativeQuery("UPDATE Promotion SET statut =:statut WHERE id =:id ")
                 .setParameter("statut", Enum.Statut.REFUSED.toString())
                 .setParameter("id", id).executeUpdate());
 
@@ -58,7 +61,14 @@ public class PromotionDAO implements IDAO<Promotion> {
 
     @Override
     public Promotion delete(long id) {
-        return null;
+        Promotion promotion = new JPA().getEm().find(Promotion.class, id);
+        new JPA().serv(em ->
+                em.remove(em.contains(promotion) ? promotion : em.merge(promotion))
+        );
+
+
+        return promotion;
+
     }
 
     //    public void displayUser(ArrayList<Promotion> userArrayList) {

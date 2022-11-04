@@ -1,8 +1,9 @@
 package com.example.gestuon_promotions_marjan.DAO;
 
 import com.example.gestuon_promotions_marjan.Entity.Store;
-import com.example.gestuon_promotions_marjan.Entity.User;
 import com.example.gestuon_promotions_marjan.helpers.JPA;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Persistence;
 
 import java.util.List;
 
@@ -27,7 +28,10 @@ public class StoreDAO implements IDAO<Store> {
 
     @Override
     public Store findByid(int id) {
-        return JPA.entityManager().find(Store.class, id);
+
+//        EntityManager em = Persistence.createEntityManagerFactory("marjane").createEntityManager();
+
+        return new JPA().getEm().find(Store.class, id);
     }
 
     @Override

@@ -26,7 +26,8 @@ public class AuthenticationFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-
+//        String z = req.();
+//        System.out.println(uri);
         String uri = req.getRequestURI();
         this.servletContext.log("Requested Resource::" + uri);
 

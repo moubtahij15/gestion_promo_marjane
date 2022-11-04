@@ -1,14 +1,10 @@
 package com.example.gestuon_promotions_marjan.controllers;
 
 import com.example.gestuon_promotions_marjan.DAO.CategorieDAO;
-import com.example.gestuon_promotions_marjan.DAO.PromotionDAO;
 import com.example.gestuon_promotions_marjan.DAO.UserDAO;
 import com.example.gestuon_promotions_marjan.Entity.User;
 import com.example.gestuon_promotions_marjan.helpers.Enum;
 import com.example.gestuon_promotions_marjan.helpers.Hash;
-import com.example.gestuon_promotions_marjan.helpers.JPA;
-import com.example.gestuon_promotions_marjan.helpers.SendMail;
-import com.example.gestuon_promotions_marjan.servlets.AdminStoreServlet;
 import com.example.gestuon_promotions_marjan.servlets.AuthServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

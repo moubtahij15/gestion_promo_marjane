@@ -5,10 +5,10 @@ import com.example.gestuon_promotions_marjan.helpers.JPA;
 
 import java.util.List;
 
-public class CommentaireDAO implements IDAO<Commentaires>{
+public class CommentaireDAO implements IDAO<Commentaires> {
     @Override
     public Commentaires save(Commentaires commentaires) {
-        JPA.serv(entityManager -> entityManager.persist(commentaires));
+        new JPA().serv(entityManager -> entityManager.persist(commentaires));
         return commentaires;
     }
 

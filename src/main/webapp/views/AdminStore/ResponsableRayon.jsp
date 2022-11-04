@@ -90,7 +90,7 @@
 
 
                             <li>
-                                <a href="http://localhost:8080/AdminStore/Responsable"
+                                <a href="#"
                                    class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                                     <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
                                          fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -98,7 +98,6 @@
                                               d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
                                               clip-rule="evenodd"></path>
                                     </svg>
-
                                     <span class="ml-3 flex-1 whitespace-nowrap">Responsable Rayon</span>
                                 </a>
                             </li>
@@ -192,13 +191,13 @@
                     </div>
 
                     <%--                    section 2 : promotion / responsable--%>
-                    <div class="w-full grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 mt-4 gap-4"
-                         x-data="{ open: ${type_sous_categorie} ,type:${type_sous_categorie}}">
+                    <div class="w-full grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-2 mt-4 gap-4"
+                    >
                         <%--                        promotion--%>
-                        <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8  2xl:col-span-2">
+                        <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8  2xl:col-span-1">
                             <div class="flex items-center justify-between mb-4">
                                 <div class="flex-shrink-0">
-                                    <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">Promotions</span>
+                                    <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">Responsbale</span>
                                     <h3 class="   text-base font-normal text-gray-500">Derniers Promotions</h3>
 
 
@@ -207,41 +206,29 @@
 
                                     <div class="flex-shrink-0">
                                         <a href="#"
-                                           x-on:click="open = ! open"
                                            class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg p-2"
                                            value="dfs">
-                                            <span x-text="(!open)?'Ajouter Promotion':'Annuler'"></span>
+
                                         </a>
                                     </div>
                                 </div>
                             </div>
                             <%--                            voir promo--%>
-                            <div x-show="!open" class="block w-full overflow-x-auto">
+                            <div class="block w-full overflow-x-auto">
 
                                 <table class="items-center w-full bg-transparent border-collapse">
                                     <thead>
                                     <tr>
                                         <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-center uppercase border-l-0 border-r-0 whitespace-nowrap">
-                                            Date Debut
+                                            Name
                                         </th>
                                         <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-center uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
-                                            Date Fin
+                                            Email
                                         </th>
                                         <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-center uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
-                                            Pourcentage
+                                            Rayon
                                         </th>
-                                        <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-center uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
-                                            Fidélité
-                                        </th>
-                                        <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-center uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
-                                            Type
-                                        </th>
-                                        <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-center uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
-                                            Rayon/sous Categorie
-                                        </th>
-                                        <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-center uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
-                                            Status
-                                        </th>
+
                                         <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-center uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
                                             Action
                                         </th>
@@ -249,27 +236,19 @@
                                     </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-100">
-                                    <c:forEach items="${Promotions}" var="promo">
+                                    <c:forEach items="${ResponsablesRayon}" var="responsable">
                                         <tr class="text-gray-500">
-                                            <td class="border-t-0 px-4 align-middle text-xs text-center font-medium text-gray-900 whitespace-nowrap p-4">${promo.getDateDebut()}</td>
-                                            <td class="border-t-0 px-4 align-center text-xs text-center font-medium text-gray-900 whitespace-nowrap p-4">${promo.getDateFin()}</td>
-                                            <td class="border-t-0 px-4 align-middle text-center text-xs font-medium text-gray-900 whitespace-nowrap p-4">${promo.getPoucentage()}
-                                                %
-                                            </td>
-                                            <td class="border-t-0 px-4 align-middle text-xs text-center font-medium text-gray-900 whitespace-nowrap p-4">${promo.getFedelite()}</td>
-                                            <td class="border-t-0 px-4 align-middle text-xs  text-center font-medium text-gray-900 whitespace-nowrap p-4">${promo.getType()}</td>
-                                            <td class="border-t-0 px-4 align-middle text-xs text-center font-medium text-gray-900 whitespace-nowrap p-4">${(promo.getType().equals('SUBCATEGORIE'))?promo.getSousCategorieByIdSousCategorie().getNom():promo.getCategorieByIdCategorie().getNom()}</td>
-                                            <td class="border-t-0 px-4 align-middle text-xs text-center font-medium text-gray-900 whitespace-nowrap p-4">${promo.getStatut()}</td>
-                                            <td class="border-t-0 px-4 align-middle text-xs text-center font-medium text-gray-900 whitespace-nowrap p-4">
-                                                <button class="mb-2 md:mb-0 w-1/2 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100">
-                                                    Editer
-                                                </button>
-                                                <a href="http://localhost:8080/AdminStore/deletePromo?idPromo=${promo.getId()}"
+                                            <td class="border-t-0 px-4 align-middle text-xs text-center font-medium text-gray-900 whitespace-nowrap p-4">${responsable.getName()}</td>
+                                            <td class="border-t-0 px-4 align-center text-xs text-center font-medium text-gray-900 whitespace-nowrap p-4">${responsable.getEmail()}</td>
 
+                                            <td class="border-t-0 px-4 align-middle text-xs text-center font-medium text-gray-900 whitespace-nowrap p-4"> ${responsable.getCategorieByIdCategorie().getNom()}</td>
+                                            <td class="border-t-0 px-4 align-middle text-xs text-center font-medium text-gray-900 whitespace-nowrap p-4 ">
+
+
+                                                <a href="http://localhost:8080/AdminStore/Responsable/delete?id=${responsable.getId()}"
                                                    class="mb-2 md:mb-0 bg-red-500  w-1/2 border border-red-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-red-600">
                                                     Suprrimer
                                                 </a>
-
 
                                             </td>
 
@@ -280,313 +259,174 @@
                                 </table>
                             </div>
 
-                            <%--                            add promotion--%>
-
-                            <div x-show="open" class=" bg-white  shadow rounded-lg  p-4 sm:p-6  w-full ">
-                                <c:if test="${erreur.size()!=0}">
-                                    <div class="bg-red-50 border-l-8 border-red-900 w-full mb-2">
-                                        <div class="flex items-center">
-                                            <div class="p-2">
-                                                <div class="flex items-center">
-                                                    <div class="ml-2">
-                                                        <svg class="h-8 w-8 text-red-900 mr-2 cursor-pointer"
-                                                             xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                             viewBox="0 0 24 24"
-                                                             stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                  stroke-width="2"
-                                                                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                                        </svg>
-                                                    </div>
-                                                    <p class="px-6 py-4 text-red-900 font-semibold text-lg">Please
-                                                        corriger les
-                                                        erreurs
-                                                        suivant :
-                                                    </p>
-                                                </div>
-                                                <div class="px-16 mb-4">
-                                                    <c:forEach items="${erreur}" var="erro">
-                                                        <li class="text-md font-bold text-red-500 text-sm">${erro}</li>
-                                                    </c:forEach>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </c:if>
-                                <form action="AdminStore/addPromo" method="post" class="space-y-4">
-                                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                                        <div>
-                                            <%--                                        <label class="sr-only" for="date_depart">Date depart</label>--%>
-                                            <label class="block text-grey-darker text-sm font-bold mb-1 px-2"
-                                                   for="date_depart"> Date Debut</label>
-
-                                            <input
-                                                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                                            <%--                                                placeholder="Email address"--%>
-                                                    name="date_depart"
-                                                    type="date"
-                                                    id="date_depart"
-                                            />
-                                        </div>
-
-                                        <div>
-                                            <%--                                        <label class="sr-only" for="date_fin">Date fin</label>--%>
-                                            <label class="block text-grey-darker text-sm font-bold mb-1 px-2"
-                                                   for="date_fin"> Date Fin</label>
-
-                                            <input
-                                                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                                            <%--                                                placeholder="Email address"--%>
-                                                    name="date_fin"
-
-                                                    type="date"
-                                                    id="date_fin"
-                                            />
-                                        </div>
-
-                                    </div>
-
-                                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                                        <div>
-                                            <label class="block text-grey-darker text-sm font-bold mb-1 px-2"
-                                                   for="pourcentage"> Pourcentage</label>
-
-                                            <input
-                                                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                                                    placeholder="Pourcentage"
-                                                    type="number"
-                                                    id="pourcentage"
-                                                    name="pourcentage"
-                                            />
-                                        </div>
-                                        <%--                                        radio type--%>
-                                        <div>
-
-
-                                            <label class="block text-grey-darker text-sm font-bold mb-1 px-2"
-                                                   for="type"> Type</label>
-                                            <fieldset class="flex flex-wrap gap-3 " id="type">
-
-                                                <div>
-
-                                                    <input
-                                                            type="radio"
-                                                            name="type"
-                                                            value="CATEGORIE"
-                                                            id="Categorie"
-                                                            class="peer hidden [&:checked_+_label_svg]:block"
-                                                            @click="type=false"
-                                                            <c:if test="${type_sous_categorie==false}">
-                                                                checked
-                                                            </c:if>
-
-                                                    />
-
-                                                    <label
-                                                            for="Categorie"
-                                                            class="flex cursor-pointer items-center justify-center gap-2 rounded-md border border-gray-100 py-2 px-3 text-gray-900 hover:border-gray-200 peer-checked:border-blue-500 peer-checked:bg-blue-500 peer-checked:text-white"
-                                                    >
-                                                        <svg
-                                                                class="hidden h-5 w-5"
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                viewBox="0 0 20 20"
-                                                                fill="currentColor"
-                                                        >
-                                                            <path
-                                                                    fill-rule="evenodd"
-                                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                                    clip-rule="evenodd"
-                                                            />
-                                                        </svg>
-
-                                                        <p class="text-sm font-medium">Categorie</p>
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <input
-                                                            type="radio"
-                                                            name="type"
-                                                            value="SUBCATEGORIE"
-                                                            id="sous_categorie"
-                                                            class="peer hidden [&:checked_+_label_svg]:block"
-                                                            @click="type=true"
-                                                            <c:if test="${type_sous_categorie==true}">
-                                                                checked
-                                                            </c:if>
-                                                    />
-
-                                                    <label
-                                                            for="sous_categorie"
-                                                            class="flex cursor-pointer items-center justify-center gap-2 rounded-md border border-gray-100 py-2 px-3 text-gray-900 hover:border-gray-200 peer-checked:border-blue-500 peer-checked:bg-blue-500 peer-checked:text-white"
-                                                    >
-                                                        <svg
-                                                                class="hidden h-5 w-5"
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                viewBox="0 0 20 20"
-                                                                fill="currentColor"
-                                                        >
-                                                            <path
-                                                                    fill-rule="evenodd"
-                                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                                    clip-rule="evenodd"
-                                                            />
-                                                        </svg>
-
-                                                        <p class="text-sm font-medium">sous Categorie</p>
-                                                    </label>
-                                                </div>
-                                            </fieldset>
-                                            <%--                                     end    radio type--%>
-                                        </div>
-                                    </div>
-
-
-                                    <%--                        dropdown--%>
-                                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-
-                                        <div>
-
-                                            <label for="countries"
-                                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Select
-                                                categorie</label>
-                                            <select id="countries"
-                                                    name="categorie"
-                                                    x-on:change=" (type)? (window.location=('http://localhost:8080/AdminStore/sousCategorie?selected_categorie='+$el.value+'')) : '' "
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                <%--                                                <option selected>Choose a Categorie</option>--%>
-                                                <c:forEach items="${categorieList}" var="categorie">
-                                                    <c:if test="${categorie.getId()==selectedCategorie}">
-                                                        <option SELECTED value=${categorie.getId()}>
-                                                                ${categorie.getNom()}
-                                                        </option>
-                                                    </c:if>
-                                                    <c:if test="${categorie.getId()!=selectedCategorie}">
-                                                        <option value=${categorie.getId()}>
-                                                                ${categorie.getNom()}
-                                                        </option>
-                                                    </c:if>
-
-
-                                                </c:forEach>
-
-
-                                            </select>
-                                        </div>
-
-                                        <div x-show="type">
-
-                                            <label for="countsries"
-                                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Select
-                                                sou categorie</label>
-                                            <SELECT id="countsries"
-                                                    name="sous_categorie"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-                                            focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
-                                            dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
-                                            dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-
-                                                <option selected>Choose a country</option>
-
-                                                <c:forEach items="${souCategoeie}"
-                                                           var="souscategorie">
-
-
-                                                    <option value=${souscategorie.getId()}>${souscategorie.getNom()}</option>
-                                                </c:forEach>
-                                            </SELECT>
-
-
-                                        </div>
-                                    </div>
-
-                                    <div class="mt-4">
-                                        <button
-                                                type="submit"
-                                                class="inline-flex w-full items-center justify-center rounded-lg bg-black px-5 py-3 text-white sm:w-auto"
-                                        >
-                                            <span class="font-medium"> Ajouter </span>
-
-                                            <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    class="ml-3 h-5 w-5"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke="currentColor"
-                                            >
-                                                <path
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                                />
-                                            </svg>
-                                        </button>
-
-
-                                        <%--                                        dropdown catgeorie--%>
-
-
-                                    </div>
-                                </form>
-                            </div>
-
-                            <%--                    end add promotion--%>
 
                             <%--                            <div id="main-chart"></div>--%>
                         </div>
                         <%--                        end promotion--%>
 
-                        <%--
                         <%--                            respo--%>
-                        <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
+                        <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 2xl:col-span-1 ">
                             <div class="mb-4 flex items-center justify-between">
                                 <div>
                                     <h3 class="text-xl font-bold text-gray-900 mb-2">Responsable de Rayon</h3>
                                     <span class="text-base font-normal text-gray-500">Responsable de Rayon avec leurs Rayon</span>
                                 </div>
-                                <div class="flex-shrink-0">
-                                    <a href="http://localhost:8080/AdminStore/Responsable"
 
-                                       class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg p-2">Voir
-                                        Plus</a>
-                                </div>
                             </div>
                             <div class="flex flex-col mt-8">
                                 <div class="overflow-x-auto rounded-lg">
                                     <div class="align-middle inline-block min-w-full">
                                         <div class="shadow overflow-hidden sm:rounded-lg">
-                                            <table class="min-w-full divide-y divide-gray-200">
-                                                <thead class="bg-gray-50">
-                                                <tr>
-                                                    <th scope="col"
-                                                        class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Responsable
-                                                    </th>
-                                                    <th scope="col"
-                                                        class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Rayon
-                                                    </th>
+                                            <%--                            add promotion--%>
 
-                                                </tr>
-                                                </thead>
-                                                <tbody class="bg-white">
+                                            <div x-show="open"
+                                                 class=" bg-white  shadow rounded-lg  p-4 sm:p-6  w-full ">
+                                                <%--                                                <c:if test="${erreur.size()!=0}">--%>
+                                                <%--                                                    <div class="bg-red-50 border-l-8 border-red-900 w-full mb-2">--%>
+                                                <%--                                                        <div class="flex items-center">--%>
+                                                <%--                                                            <div class="p-2">--%>
+                                                <%--                                                                <div class="flex items-center">--%>
+                                                <%--                                                                    <div class="ml-2">--%>
+                                                <%--                                                                        <svg class="h-8 w-8 text-red-900 mr-2 cursor-pointer"--%>
+                                                <%--                                                                             xmlns="http://www.w3.org/2000/svg"--%>
+                                                <%--                                                                             fill="none"--%>
+                                                <%--                                                                             viewBox="0 0 24 24"--%>
+                                                <%--                                                                             stroke="currentColor">--%>
+                                                <%--                                                                            <path stroke-linecap="round"--%>
+                                                <%--                                                                                  stroke-linejoin="round"--%>
+                                                <%--                                                                                  stroke-width="2"--%>
+                                                <%--                                                                                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>--%>
+                                                <%--                                                                        </svg>--%>
+                                                <%--                                                                    </div>--%>
+                                                <%--                                                                    <p class="px-6 py-4 text-red-900 font-semibold text-lg">--%>
+                                                <%--                                                                        Please--%>
+                                                <%--                                                                        corriger les--%>
+                                                <%--                                                                        erreurs--%>
+                                                <%--                                                                        suivant :--%>
+                                                <%--                                                                    </p>--%>
+                                                <%--                                                                </div>--%>
+                                                <%--                                                                <div class="px-16 mb-4">--%>
+                                                <%--                                                                    <c:forEach items="${erreur}" var="erro">--%>
+                                                <%--                                                                        <li class="text-md font-bold text-red-500 text-sm">${erro}</li>--%>
+                                                <%--                                                                    </c:forEach>--%>
+                                                <%--                                                                </div>--%>
+                                                <%--                                                            </div>--%>
+                                                <%--                                                        </div>--%>
+                                                <%--                                                    </div>--%>
+                                                <%--                                                </c:if>--%>
+                                                <form action="AdminStore/addResponsable" method="post"
+                                                      class="space-y-4">
+                                                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                                        <div>
+                                                            <%--                                        <label class="sr-only" for="date_depart">Date depart</label>--%>
+                                                            <label class="block text-grey-darker text-sm font-bold mb-1 px-2"
+                                                                   for="nom">Nom Complet</label>
+
+                                                            <input
+                                                                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                                                    placeholder="Nom Complet"
+                                                                    name="nom"
+                                                                    type="text"
+                                                                    id="nom"
+                                                            />
+                                                        </div>
+
+                                                        <div>
+                                                            <%--                                        <label class="sr-only" for="date_fin">Date fin</label>--%>
+                                                            <label class="block text-grey-darker text-sm font-bold mb-1 px-2"
+                                                                   for="email"> Email</label>
+
+                                                            <input
+                                                                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                                                    placeholder="Email "
+                                                                    name="email"
+
+                                                                    type="email"
+                                                                    id="email"
+                                                            />
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                                        <div>
+                                                            <label class="block text-grey-darker text-sm font-bold mb-1 px-2"
+                                                                   for="pass"> Mot De Pass</label>
+
+                                                            <input
+                                                                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                                                    placeholder="Mot De Pass"
+                                                                    type="password"
+                                                                    id="pass"
+                                                                    name="pass"
+                                                            />
+                                                        </div>
+                                                        <%--                                        radio type--%>
+                                                        <div>
+
+                                                            <label for="Categorie"
+                                                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Select
+                                                                categorie</label>
+                                                            <select id="Categorie"
+                                                                    name="categorie"
+                                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                <%--                                                <option selected>Choose a Categorie</option>--%>
+                                                                <c:forEach items="${FreeCategorieList}" var="categorie">
+<%--                                                                    <c:if test="${categorie.getId()==selectedCategorie}">--%>
+<%--                                                                        <option SELECTED value=${categorie.getId()}>--%>
+<%--                                                                                ${categorie.getNom()}--%>
+<%--                                                                        </option>--%>
+<%--                                                                    </c:if>--%>
+<%--                                                                    <c:if test="${categorie.getId()!=selectedCategorie}">--%>
+                                                                        <option value=${categorie.getId()}>
+                                                                                ${categorie.getNom()}
+                                                                        </option>
+<%--                                                                    </c:if>--%>
 
 
-                                                <c:forEach items="${ResponsablesRayon}" var="respo">
-                                                    <tr>
-                                                        <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
-                                                            <span class="font-semibold"> ${respo.getName()}</span>
-                                                        </td>
-                                                        <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                                                ${respo.getCategorieByIdCategorie().getNom()}
-                                                        </td>
-
-                                                    </tr>
-                                                </c:forEach>
+                                                                </c:forEach>
 
 
-                                                </tbody>
-                                            </table>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <%--                        dropdown--%>
+
+
+                                                    <div class="mt-4">
+                                                        <button
+                                                                type="submit"
+                                                                class="inline-flex w-full items-center justify-center rounded-lg bg-black px-5 py-3 text-white sm:w-auto"
+                                                        >
+                                                            <span class="font-medium"> Ajouter </span>
+
+                                                            <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    class="ml-3 h-5 w-5"
+                                                                    fill="none"
+                                                                    viewBox="0 0 24 24"
+                                                                    stroke="currentColor"
+                                                            >
+                                                                <path
+                                                                        stroke-linecap="round"
+                                                                        stroke-linejoin="round"
+                                                                        stroke-width="2"
+                                                                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                                                />
+                                                            </svg>
+                                                        </button>
+
+
+                                                        <%--                                        dropdown catgeorie--%>
+
+
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                            <%--                    end add promotion--%>
                                         </div>
                                     </div>
                                 </div>

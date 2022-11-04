@@ -9,31 +9,34 @@ import java.util.function.Consumer;
 
 public class JPA {
     private static EntityManagerFactory emf;
-    private static EntityManager em;
+    private   EntityManager em;
 
     static {
         emf = Persistence.createEntityManagerFactory("marjane");
+
+    }
+    public JPA() {
         em = emf.createEntityManager();
     }
 
-    public static void serv(Consumer<EntityManager> action){
+
+    public  void serv(Consumer<EntityManager> action){
         EntityTransaction tr = em.getTransaction();
         try {
             tr.begin();
             action.accept(em);
             tr.commit();
-        }catch (RuntimeException re){
+            }catch (RuntimeException re){
             tr.rollback();
             throw re;
         }
     }
 
-    public static EntityManagerFactory entityManagerFactory() {
+    public EntityManagerFactory getEmf() {
         return emf;
     }
 
-    public static EntityManager entityManager() {
+    public EntityManager getEm() {
         return em;
     }
-
 }
